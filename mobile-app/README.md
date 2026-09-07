@@ -1,0 +1,113 @@
+# FitCheck Mobile App
+
+`frontend-web`을 **WebView**로 띄우는 Expo 껍데기입니다.  
+별도 네이티브 화면 없이 웹 UI를 그대로 사용합니다. (Expo SDK 54)
+
+> 웹 기능 진행도: [../frontend-web/README.md](../frontend-web/README.md)  
+> Monorepo · 배포: [../docs/README.md](../docs/README.md)
+
+## 현재 진행도 (2026-07-30)
+
+| 항목 | 상태 | 비고 |
+|------|------|------|
+| Expo + WebView 기본 셸 | ✅ | `App.js` 단일 WebView |
+| frontend-web URL 로드 | ✅ | `EXPO_PUBLIC_WEB_APP_URL` → `/user` 자동 진입 |
+| Safe Area (노치·홈 인디케이터) | ✅ | `react-native-safe-area-context` → WebView에 `--fitcheck-safe-*` CSS 주입 |
+| 모바일 UI 겹침 방지 | ✅ | frontend-web `safe-area.css`와 연동 — 헤더·하단 네비·지도·식단 CTA |
+| 뒤로가기 제스처 | ✅ | `allowsBackForwardNavigationGestures` |
+| Geolocation (WebView) | ✅ | `/user/map` GPS 테스트 가능 |
+| Vercel 배포본 연동 | ✅ | Auth(이중 로그인·비밀번호 재설정)·식단·상담 등 웹 기능 그대로 사용 |
+| 네이티브 전용 UI / Push | ❌ | 미구현 |
+| 앱스토어 빌드 (EAS) | ❌ | 미진행 |
+
+**요약:** 모바일 앱은 **웹 배포본(Vercel) 또는 로컬 dev를 감싸는 래퍼**입니다.  
+Safe Area는 네이티브에서 측정해 WebView DOM에 주입하고, 레이아웃은 **frontend-web**에서 처리합니다.  
+신규 기능은 frontend-web에서 개발하면 WebView에 자동 반영됩니다.
+
+---
+
+## 배포 연동
+
+| 구성 | 플랫폼 | URL / 설정 |
+|------|--------|------------|
+| **웹 UI** | Vercel | `EXPO_PUBLIC_WEB_APP_URL=https://hub-tan-pi.vercel.app` |
+| **API** | Render | https://fitcheck-server-wvj4.onrender.com (`VITE_API_BASE_URL`) |
+
+Vercel 배포본 사용 시 `frontend-web/vercel.json`(SPA rewrite)이 반영된 뒤 연결하세요.
+
+---
+
+## 실행
+
+```bash
+cp .env.example .env
+# EXPO_PUBLIC_WEB_APP_URL 환경에 맞게 수정
+npm install
+npm start
+```
+
+Expo Go 또는 시뮬레이터에서 QR 스캔 후 실행합니다.
+
+## WebView URL
+
+| 환경 | `EXPO_PUBLIC_WEB_APP_URL` 예시 |
+|------|-------------------------------|
+| iOS/Android 시뮬레이터 | `http://localhost:5173` |
+| 실기기 (같은 Wi-Fi) | `http://192.168.x.x:5173` |
+| 배포 (Vercel) | `https://hub-tan-pi.vercel.app` |
+
+앱은 URL 뒤에 자동으로 `/user`를 붙여 회원 홈으로 진입합니다. (로그인 필요 시 웹 Auth UI 사용)
+
+### Expo Go에서 `404: NOT_FOUND` (Vercel) 가 뜰 때
+
+Vercel 배포본에 **SPA 라우팅 설정**(`frontend-web/vercel.json`)이 반영되기 전이면  
+`https://....vercel.app/user` 경로가 404를 반환합니다.
+
+**로컬에서 바로 테스트 (권장):**
+
+```bash
+# 1) frontend-web — LAN 공개
+cd ../frontend-web
+npm run dev -- --host
+
+# 2) mobile-app/.env 수정 (맥 IP 확인: ipconfig getifaddr en0)
+EXPO_PUBLIC_WEB_APP_URL=http://192.168.0.12:5173
+
+# 3) Expo 재시작 (env 변경 후 반드시)
+cd ../mobile-app
+npm start
+```
+
+**배포 URL 사용 시:** `frontend-web/vercel.json` 포함 후 Vercel **재배포** 필요.
+
+실기기 로컬 테스트:
+
+```bash
+# frontend-web — LAN 접근 허용
+cd ../frontend-web
+npm run dev -- --host
+```
+
+NCP Maps **Web Service URL**에 사용 origin을 등록하세요 (`localhost:5173` 또는 LAN IP).
+
+## GPS / 위치 권한 테스트
+
+1. frontend-web + backend 실행 (또는 Vercel + Render 배포본)
+2. mobile-app → Expo Go 실행
+3. `/user/map` → **내 위치** 탭 → OS 권한 허용
+4. 파란 마커가 GPS 위치로 이동하는지 확인  
+   (권한 거부 시 서면 목업 좌표로 폴백)
+
+## Safe Area 동작
+
+1. `SafeAreaProvider` + `useSafeAreaInsets()`로 OS inset 측정  
+2. WebView 로드·inset 변경 시 `injectJavaScript`로 `--fitcheck-safe-top/bottom/left/right` 설정  
+3. frontend-web `index.html`의 `viewport-fit=cover` + `safe-area.css`가 헤더·하단 네비에 적용  
+
+Vercel에 frontend-web 최신 빌드가 배포되어 있어야 Safe Area UI가 실기기에서 반영됩니다.
+
+## 다음 단계 (예상)
+
+1. 스플래시 · 앱 아이콘  
+2. (선택) EAS Build, 딥링크, 푸시 알림  
+3. (선택) OAuth/비밀번호 재설정 딥링크를 WebView에서 처리  
