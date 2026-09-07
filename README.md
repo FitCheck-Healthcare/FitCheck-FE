@@ -70,16 +70,16 @@
 
 비대면 셀프 케어 → AI 식단 → 로컬 헬스장 매칭 → O2O 상담까지의 사용자 여정입니다.
 
-|                                                        |                                                         |
-| :----------------------------------------------------: | :-----------------------------------------------------: |
-|          **랜딩** — PT 없이도 체계적으로 시작          |          **회원 홈** — 루틴 · 식단 · 근처 매칭          |
-|      ![랜딩](./showcase/screenshots/landing.webp)      |      ![회원 홈](./showcase/screenshots/home.webp)       |
-|           **맞춤 PT 강좌** — 부위·목적별 VOD           |    **강좌 상세** — 영상 · 자극 포인트 · 세트 가이드     |
-|  ![맞춤 PT 강좌](./showcase/screenshots/courses.webp)  | ![강좌 상세](./showcase/screenshots/course-detail.webp) |
-|      **식단 기록** — Gemini Vision AI 분석·피드백      |       **지도** — Naver Map · GPS 기반 헬스장 매칭       |
-|    ![식단 기록](./showcase/screenshots/meals.webp)     |        ![지도](./showcase/screenshots/map.webp)         |
-|        **헬스장 상세** — 매칭 점수 · 운영 정보         |        **상담 신청** — O2O 연계 · PII 암호화 폼         |
-| ![헬스장 상세](./showcase/screenshots/gym-detail.webp) | ![상담 신청](./showcase/screenshots/consultation.webp)  |
+|                                              |                                                  |
+| :------------------------------------------: | :----------------------------------------------: |
+|     **랜딩** — PT 없이도 체계적으로 시작     |      **회원 홈** — 루틴 · 식단 · 근처 매칭       |
+|         ![랜딩](/image/landing.webp)         |           ![회원 홈](/image/home.webp)           |
+|      **맞춤 PT 강좌** — 부위·목적별 VOD      | **강좌 상세** — 영상 · 자극 포인트 · 세트 가이드 |
+|     ![맞춤 PT 강좌](/image/courses.webp)     |     ![강좌 상세](/image/course-detail.webp)      |
+| **식단 기록** — Gemini Vision AI 분석·피드백 |   **지도** — Naver Map · GPS 기반 헬스장 매칭    |
+|       ![식단 기록](/image/meals.webp)        |             ![지도](/image/map.webp)             |
+|   **헬스장 상세** — 매칭 점수 · 운영 정보    |     **상담 신청** — O2O 연계 · PII 암호화 폼     |
+|    ![헬스장 상세](/image/gym-detail.webp)    |      ![상담 신청](/image/consultation.webp)      |
 
 ---
 
@@ -101,7 +101,7 @@
 아이디어 수립부터 프롬프트 설계·실행, 기능 구현·테스트까지 **Cursor Agent**와 반복 협업한 개발 흐름입니다.
 
 <p align="center">
-  <img src="./docs/ai-agent-workflow.png" alt="AI Agent Workflow — 개발자 → 요구사항 분석 → 프롬프트 설계/검토/실행 → 기능 구현 → 테스트 및 FitCheck 적용" width="100%" />
+  <img src="/image/ai-agent-workflow.png" alt="AI Agent Workflow — 개발자 → 요구사항 분석 → 프롬프트 설계/검토/실행 → 기능 구현 → 테스트 및 FitCheck 적용" width="100%" />
 </p>
 
 1. **아이디어 · 요구사항 분석** — 문제 정의와 MVP 범위 확정
