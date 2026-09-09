@@ -3,8 +3,11 @@
 `frontend-web`을 **WebView**로 띄우는 Expo 껍데기입니다.  
 별도 네이티브 화면 없이 웹 UI를 그대로 사용합니다. (Expo SDK 54)
 
-> 웹 기능 진행도: [../frontend-web/README.md](../frontend-web/README.md)  
-> Monorepo · 배포: [../docs/README.md](../docs/README.md)
+> **2026-09-07** — Naver AI Agent Challenge에서 시작된 개인 프로젝트를 GitHub Organization으로 분리 및 푸시하였습니다.
+
+> 프로젝트 소개: [../README.md](../README.md)  
+> 웹 앱: [../frontend-web/README.md](../frontend-web/README.md)  
+> 백엔드 · API · 암호화: [FitCheck-BE](https://github.com/FitCheck-Healthcare/FitCheck-BE)
 
 ## 현재 진행도 (2026-07-30)
 
@@ -31,7 +34,7 @@ Safe Area는 네이티브에서 측정해 WebView DOM에 주입하고, 레이아
 | 구성 | 플랫폼 | URL / 설정 |
 |------|--------|------------|
 | **웹 UI** | Vercel | `EXPO_PUBLIC_WEB_APP_URL=https://hub-tan-pi.vercel.app` |
-| **API** | Render | https://fitcheck-server-wvj4.onrender.com (`VITE_API_BASE_URL`) |
+| **API** | Render | https://fitcheck-server-wvj4.onrender.com (`VITE_API_BASE_URL`) — [FitCheck-BE](https://github.com/FitCheck-Healthcare/FitCheck-BE) |
 
 Vercel 배포본 사용 시 `frontend-web/vercel.json`(SPA rewrite)이 반영된 뒤 연결하세요.
 
@@ -92,7 +95,7 @@ NCP Maps **Web Service URL**에 사용 origin을 등록하세요 (`localhost:517
 
 ## GPS / 위치 권한 테스트
 
-1. frontend-web + backend 실행 (또는 Vercel + Render 배포본)
+1. frontend-web + [FitCheck-BE](https://github.com/FitCheck-Healthcare/FitCheck-BE) 실행 (또는 Vercel + Render 배포본)
 2. mobile-app → Expo Go 실행
 3. `/user/map` → **내 위치** 탭 → OS 권한 허용
 4. 파란 마커가 GPS 위치로 이동하는지 확인  
