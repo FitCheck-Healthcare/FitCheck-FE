@@ -2,8 +2,11 @@
 
 회원(모바일 비율) / 트레이너(데스크톱) 모드를 담는 Vite + React + TypeScript 웹 앱입니다.
 
-> Monorepo 시작 가이드: [../docs/README.md](../docs/README.md)  
-> 백엔드 · API · 암호화: [../backend/README.md](../backend/README.md)
+> **2026-09-07** — Naver AI Agent Challenge에서 시작된 개인 프로젝트를 GitHub Organization으로 분리 및 푸시하였습니다.
+
+> 프로젝트 소개: [../README.md](../README.md)  
+> 모바일 앱: [../mobile-app/README.md](../mobile-app/README.md)  
+> 백엔드 · API · 암호화: [FitCheck-BE](https://github.com/FitCheck-Healthcare/FitCheck-BE)
 
 ## 현재 진행도 (2026-07-30)
 
@@ -63,6 +66,8 @@
 
 Vercel OAuth: `VITE_SITE_URL` = 배포 도메인. Supabase Redirect URL에 `/auth/callback`, `/reset-password` 등록.
 
+로컬 API는 [FitCheck-BE](https://github.com/FitCheck-Healthcare/FitCheck-BE)를 `localhost:5001`에서 실행합니다.
+
 ---
 
 ## 폴더 안내
@@ -115,7 +120,7 @@ http://localhost:5173
 | `/user/account` | 계정 설정 |
 | `/trainer` | 트레이너 대시보드 |
 
-로컬 개발 시 백엔드(`localhost:5001`)가 함께 실행 중이어야 API 기능이 동작합니다.
+로컬 개발 시 백엔드([FitCheck-BE](https://github.com/FitCheck-Healthcare/FitCheck-BE), `localhost:5001`)가 함께 실행 중이어야 API 기능이 동작합니다.
 
 ## 스크립트
 
